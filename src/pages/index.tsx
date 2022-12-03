@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const SLACK_OAUTH_URL = "https://slack.com/oauth/v2/authorize";
+const SLACK_OAUTH_BASE_URL = "https://slack.com/oauth/v2/authorize";
 const SLACK_SCOPES = ["chat:write", "channels:read", "chat:write.public"];
 
 export default function Home() {
@@ -12,20 +12,23 @@ export default function Home() {
 
   const handleConnect = () => {
     const state = {
-      workspace_id: "signal",
       redirect_uri: REDIRECT_URI,
     };
+
+    // Encode the state
+    const encodedState = btoa(JSON.stringify(state));
 
     const params = {
       client_id: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID as string,
       scope: SLACK_SCOPES.join(","),
       redirect_uri: REDIRECT_URI,
-      state: btoa(JSON.stringify(state)),
+      state: encodedState,
     };
 
-    const url = SLACK_OAUTH_URL + "?" + new URLSearchParams(params).toString();
+    const authUrl =
+      SLACK_OAUTH_BASE_URL + "?" + new URLSearchParams(params).toString();
 
-    window.open(url);
+    window.open(authUrl);
   };
 
   return (
