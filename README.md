@@ -2,6 +2,8 @@
 
 https://api.slack.com/authentication/oauth-v2
 
+![](https://a.slack-edge.com/fbd3c/img/api/articles/oauth_scopes_tutorial/slack_oauth_flow_diagram.png)
+
 ## Getting Started
 
 First, run the development server:
@@ -20,6 +22,10 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+### Install the example Slack app
+
+Click on the button to initiate the OAuth flow.
+
 ## Environment variables
 
 `NEXT_PUBLIC_SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
@@ -32,7 +38,55 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 Upon clicking the "Connect" button, your app will redirect the user to Slack's authorization screen at `https://slack.com/oauth/v2/authorize`. Included in the URL are a list of scopes that your app is requesting the user to approve. In this example, the scopes are `channels:read`, `chat:write`, and `chat:write.public`.
 
-###
+#### Generate the authorization URL
+
+```ts
+const SLACK_OAUTH_BASE_URL = "https://slack.com/oauth/v2/authorize";
+```
+
+```ts
+const SLACK_SCOPES = ["chat:write", "channels:read", "chat:write.public"];
+```
+
+```ts
+const origin =
+  typeof window !== "undefined" && window.location.origin
+    ? window.location.origin
+    : "";
+const REDIRECT_URI = origin + "/api/auth/callback/slack";
+```
+
+The `state` parameter only accepts a string, so in order to pass in an object you must first encode the object in Base64, and then decode it later (this will be shown later). The callback page (redirect URL) is handled server-side and may not necessarily have the data you need to perform other operations, so you will need to include other information in this state, such as the user ID, workspace ID, or Slack team ID. 
+
+```ts
+const state = {
+  redirect_uri: REDIRECT_URI,
+  // Incude any other data
+};
+
+// Encode the state
+const encodedState = btoa(JSON.stringify(state));
+```
+
+Convert the params object into URL query parameters and construct the authorization URL.
+
+```ts
+const params = {
+  client_id: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID as string,
+  scope: SLACK_SCOPES.join(","),
+  redirect_uri: REDIRECT_URI,
+  state: encodedState,
+};
+
+const authUrl =
+  SLACK_OAUTH_BASE_URL + "?" + new URLSearchParams(params).toString();
+```
+
+Finally, open the URL.
+
+```ts
+window.open(authUrl);
+```
 
 ## Deploy on Vercel
 
