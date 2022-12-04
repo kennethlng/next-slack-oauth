@@ -38,8 +38,6 @@ Click on the button to initiate the OAuth flow.
 
 Upon clicking the "Connect" button, your app will redirect the user to Slack's authorization screen at `https://slack.com/oauth/v2/authorize`. Included in the URL are a list of scopes that your app is requesting the user to approve. In this example, the scopes are `channels:read`, `chat:write`, and `chat:write.public`.
 
-#### Generate the authorization URL
-
 ```ts
 const SLACK_OAUTH_BASE_URL = "https://slack.com/oauth/v2/authorize";
 ```
@@ -86,6 +84,49 @@ Finally, open the URL.
 
 ```ts
 window.open(authUrl);
+```
+
+Full example:
+
+```tsx
+const Example = () => {
+  const origin =
+    typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "";
+  const REDIRECT_URI = origin + "/api/auth/callback/slack";
+
+  const handleConnect = () => {
+    const state = {
+      redirect_uri: REDIRECT_URI,
+    };
+
+    // Encode the state
+    const encodedState = btoa(JSON.stringify(state));
+
+    const params = {
+      client_id: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID as string,
+      scope: SLACK_SCOPES.join(","),
+      redirect_uri: REDIRECT_URI,
+      state: encodedState,
+    };
+
+    const authUrl =
+      SLACK_OAUTH_BASE_URL + "?" + new URLSearchParams(params).toString();
+
+    window.open(authUrl);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleConnect}
+    >
+      Connect
+    </button>
+  );
+}
+
 ```
 
 ### Waiting for user to approve the requested scopes
