@@ -98,6 +98,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 The OAuth flow only works on secured websites. You cannot test the flow on `localhost`.
 
+## Add environment variables
+
+<img width="1552" alt="Screen Shot 2022-12-03 at 4 32 52 PM" src="https://user-images.githubusercontent.com/13254616/205468117-4c06c30d-0acb-4b74-a583-86e70f17474a.png">
+
 ## Dedicated Vercel domain for your branch
 
 Whenever your PR or main branch is updated, Vercel will automatically deploy a new "Preview" site for each change. 
