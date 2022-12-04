@@ -26,7 +26,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 Click on the button to initiate the OAuth flow.
 
-## Environment variables
+### Environment variables
 
 `NEXT_PUBLIC_SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
 
