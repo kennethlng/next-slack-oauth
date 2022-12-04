@@ -88,6 +88,10 @@ Finally, open the URL.
 window.open(authUrl);
 ```
 
+### Waiting for user to approve the requested scopes
+
+<img width="1552" alt="Screen Shot 2022-12-03 at 4 34 05 PM" src="https://user-images.githubusercontent.com/13254616/205468148-d43b3e9d-554d-4b15-a351-54c9e879bb36.png">
+
 ## Deploy on Vercel
 
 Deploying a Nextjs app on Vercel is really seamless.
@@ -98,7 +102,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 The OAuth flow only works on secured websites. You cannot test the flow on `localhost`.
 
-## Add environment variables
+### Add environment variables
 
 <img width="1552" alt="Screen Shot 2022-12-03 at 4 32 52 PM" src="https://user-images.githubusercontent.com/13254616/205468117-4c06c30d-0acb-4b74-a583-86e70f17474a.png">
 
