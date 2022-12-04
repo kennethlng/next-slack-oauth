@@ -42,6 +42,26 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-Whenever your PR or main branch is updated, Vercel will automatically deploy a new "Preview" site for each change. Because the `redirect_uri` is based on each new site, Slack will require you to include each new `redirect_uri` in the Slack app's "OAuth & Permissions" "Redirect URLs" configuration. If any `redirect_uri` is not included in that list, the oauth flow is immediately exited.
+The OAuth flow only works on secured websites. You cannot test the flow on `localhost`.
 
-To prevent this hassle, I recommend creating a unique domain in Vercel for the specific branch you're working with in your project. For example, if you're working on a branch in your project called `slack-integration`, you can create a unique domain dedicated to hosting deployments from the `slack-integration` branch.
+## Dedicated Vercel domain for your branch
+
+Whenever your PR or main branch is updated, Vercel will automatically deploy a new "Preview" site for each change. 
+
+<img width="1552" alt="Screen Shot 2022-12-03 at 4 10 45 PM" src="https://user-images.githubusercontent.com/13254616/205467599-7c83fb59-0cbe-4df2-90b4-04d15b02f3c2.png">
+
+> Notice that each preview site created for each git commit is unique.
+
+Because the `redirect_uri` is based on each new site, Slack will require you to include each new `redirect_uri` in the Slack app's "OAuth & Permissions" "Redirect URLs" configuration. If any `redirect_uri` is not included in that list, the oauth flow is immediately exited.
+
+<img width="631" alt="Screen Shot 2022-12-03 at 4 15 26 PM" src="https://user-images.githubusercontent.com/13254616/205467699-ce2336b9-83c6-4d3b-97cd-2a389ce2d5f7.png">
+
+As you can image, this gets pretty tedious. To prevent this hassle, I recommend creating a unique domain in Vercel for the specific branch you're working with in your project. For example, if you're working on a branch in your project called `slack-integration`, you can create a unique domain dedicated to hosting deployments from the `slack-integration` branch.
+
+<img width="1552" alt="Screen Shot 2022-12-03 at 4 05 05 PM" src="https://user-images.githubusercontent.com/13254616/205467549-90d436f1-8fdf-450c-8870-24978f8da157.png">
+
+<img width="1552" alt="Screen Shot 2022-12-03 at 4 05 13 PM" src="https://user-images.githubusercontent.com/13254616/205467551-f8b74efc-9c6c-4252-b528-46d0189ed373.png">
+
+Now, in the Slack app, add your redirect URL using this unique domain.
+
+<img width="620" alt="Screen Shot 2022-12-03 at 4 16 40 PM" src="https://user-images.githubusercontent.com/13254616/205467732-4d9ec4ee-7579-4fa4-bb8b-1cc411aa0a3b.png">
