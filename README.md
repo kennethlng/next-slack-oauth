@@ -1,8 +1,10 @@
 # next-slack-oauth
 
-https://api.slack.com/authentication/oauth-v2
+This is an example implementation of the Slack OAuth2 integration flow as outlined [here](). The example is built jn Next.js and deployed to Vercel. You might find this handy if you're building a Slack app and you want users on your website to be able to install/integrate your Slack app in their Slack workspace. At the end of the OAuth2 flow, assuming the user has granted you the permissions to install your Slack app, you will receive a Slack access token that will allow to perform actions, such as sending messages, getting a list of channels, in their workspace either as a Slack bot or on the user's behalf.   
 
 ![](https://a.slack-edge.com/fbd3c/img/api/articles/oauth_scopes_tutorial/slack_oauth_flow_diagram.png)
+
+To see this example in action, go to https://next-slack-oauth.vercel.app. 
 
 ## Getting Started
 
