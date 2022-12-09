@@ -1,10 +1,20 @@
 # next-slack-oauth
 
-https://api.slack.com/authentication/oauth-v2
+This is an example implementation of the Slack OAuth2 integration flow as outlined [here](https://api.slack.com/authentication/oauth-v2). The example app is built jn Next.js and deployed to Vercel. 
 
 ![](https://a.slack-edge.com/fbd3c/img/api/articles/oauth_scopes_tutorial/slack_oauth_flow_diagram.png)
 
-## Getting Started
+You might find this handy if you're building a Slack app and you want users on your website to be able to install/integrate your Slack app in their Slack workspace. At the end of the OAuth2 flow, assuming the user has granted you the permissions to install your Slack app, you will receive a Slack access token that will allow you to perform actions, such as sending messages and getting a list of channels, in their workspace either as a Slack bot or on the user's behalf.   
+
+To see this example in action, go to https://next-slack-oauth.vercel.app. 
+
+## Getting started
+
+Create a Slack app.
+
+`NEXT_PUBLIC_SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
+
+> Remember that any variables exposed to the browser must be prefixed with `NEXT_PUBLIC_`.
 
 First, run the development server:
 
@@ -16,23 +26,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-### Install the example Slack app
-
-Click on the button to initiate the OAuth flow.
-
-## Environment variables
-
-`NEXT_PUBLIC_SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
-
-> Remember that any variables exposed to the browser must be prefixed with `NEXT_PUBLIC_`.
-
-## OAuth
+## OAuth2 flow
 
 ### Asking for scopes
 
